@@ -8,6 +8,8 @@ import LoginPage from './pages/login.tsx'
 import RegisterPage from './pages/register.tsx'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.ts'
+import { SnackbarProvider } from 'notistack'
+import { SnackbarConfigurator } from './snackbar.tsx'
 
 const router = createBrowserRouter([
   {
@@ -27,7 +29,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <SnackbarProvider>
+        <SnackbarConfigurator/>
+        <RouterProvider router={router} />
+      </SnackbarProvider>
     </Provider>
   </React.StrictMode>,
 )

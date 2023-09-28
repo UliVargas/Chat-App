@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { userApi } from '.';
+import { User } from '../../../interfaces/user.interface';
 
 export interface UserSliceState {
-  users: []
+  users: User[]
 }
 
 const initialState: UserSliceState = {
@@ -12,11 +14,19 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    addUsers: (state, action) => {
+    addUser: (state, action) => {
       state.users = action.payload
     }
+  },
+  extraReducers: builder => {
+    builder.addMatcher(
+      userApi.endpoints.getAllUsers.matchFulfilled,
+      (state, action) => {
+        state.users = action.payload
+      }
+    )
   }
 })
 
-export const { addUsers } = userSlice.actions
+export const { addUser } = userSlice.actions
 export default userSlice.reducer
