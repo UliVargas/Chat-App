@@ -1,4 +1,7 @@
+import { User } from './user.interface';
+
 export interface Chat {
-  id:        string;
+  id: string;
+  users: User[]
   createdAt: string;
 }

@@ -10,7 +10,7 @@ export const createMessage = async (req:Request, res: Response) => {
   }
 }
 
-export const getMessageByRoom = async (req: Request, res: Response) => {
+export const getMessageByChatId = async (req: Request, res: Response) => {
   try {
     const messages = await getMessagesByChatService(req.params.chatId)
     res.status(200).json(messages)

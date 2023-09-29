@@ -1,7 +1,31 @@
-# Awesome Project Build with TypeORM
+# Challenge Rest API
 
-Steps to run this project:
+## Installation
 
-1. Run `npm i` command
-2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command
+```bash
+$ yarn install
+```
+## Config
+
+```dotenv
+PORT=5000
+DB_NAME=chatdb
+DB_PASSWORD=password
+DB_USERNAME=root
+DB_HOST=localhost
+DB_PORT=3306
+NODE_ENV=development
+JWT_SECRET=secret_key
+````
+
+```bash
+# Setup the development database with docker
+$ docker compose up -d
+```
+
+## Running the app
+
+```bash
+# watch mode
+$ yarn run dev
+```

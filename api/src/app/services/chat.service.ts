@@ -33,6 +33,21 @@ export const findChatById = async (chatId: string) => {
   }
 }
 
+export const getAllChatsByUserService = async (userId: string) => {
+  try {
+    return await chatRepository
+      .createQueryBuilder('chat')
+      .innerJoin('chat.users', 'users')
+      .leftJoinAndSelect('chat.users', 'loadedUsers')
+      .where('users.id = :id', { id: userId })
+      .getMany()
+  } catch (error) {
+    error.status = 404
+    error.message = 'Chat not found'
+    throw error
+  }
+}
+
 export const getAllChatsByUsersService = async (firstUserId: string, secondUserId: string) => {
   try {
     return await chatRepository

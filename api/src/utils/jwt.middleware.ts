@@ -1,5 +1,5 @@
 import * as JWT from 'jsonwebtoken'
-import { env } from '../config/env'
+import { env } from '../common/config/env'
 
 export const verifyToken = (token: string) => {
   return JWT.verify(token, env.JWT_SECRET)

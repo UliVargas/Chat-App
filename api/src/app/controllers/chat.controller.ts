@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { createchatService, getAllChatsByUsersService } from '../services/chat.service'
+import { createchatService, getAllChatsByUserService, getAllChatsByUsersService } from '../services/chat.service'
 
 export const createChat = async (req: Request, res: Response) => {
   try {
@@ -7,6 +7,16 @@ export const createChat = async (req: Request, res: Response) => {
     res.status(201).json(chatRoom)
   } catch (error) {
     return res.json(error)
+  }
+}
+
+export const getAllChatsByUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params
+    const chat = await getAllChatsByUserService(userId)
+    res.status(200).json(chat)
+  } catch (error) {
+    res.status(error.status).json(error)
   }
 }
 

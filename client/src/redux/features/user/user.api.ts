@@ -23,10 +23,16 @@ export const userApi = createApi({
         data
       }),
       transformResponse: ({ data }) => data
+    }),
+    getUser: builder.query<User, { userId: string }>({
+      query: ({ userId }) => ({
+        url: `/users/${userId}`,
+        method: 'GET'
+      })
     })
   })
 })
 
-export const { useCreateUserMutation, useGetAllUsersQuery, useLazyGetAllUsersQuery } = userApi
+export const { useCreateUserMutation, useGetAllUsersQuery, useLazyGetAllUsersQuery, useGetUserQuery, useLazyGetUserQuery } = userApi
 
-export const { createUser, getAllUsers } = userApi.endpoints
+export const { createUser, getAllUsers, getUser } = userApi.endpoints

@@ -2,8 +2,10 @@ import { Box, Button, Container, Grid, Paper, Stack, Typography } from '@mui/mat
 import { Form, Formik } from 'formik';
 import { TextInput } from '../components/atoms/text-input';
 import { Link } from 'react-router-dom';
+import { useLoginMutation } from '../redux/features/auth/auth.api';
 
 export default function LoginPage() {
+  const [Login] = useLoginMutation()
   return (
     <main>
       <Container sx={{
@@ -24,7 +26,7 @@ export default function LoginPage() {
                 email: '',
                 password: ''
               }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => Login(values)}
             >
               <Grid width='100%'>
                 <Form>

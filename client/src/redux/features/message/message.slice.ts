@@ -4,18 +4,20 @@ import { Message } from '../../../interfaces/message.interface';
 
 export interface UserSliceState {
   messages: Message[]
+  newMessage: any
 }
 
 const initialState: UserSliceState = {
-  messages: []
+  messages: [],
+  newMessage: {}
 }
 
 export const messageSlice = createSlice({
-  name: 'user',
+  name: 'message',
   initialState,
   reducers: {
     addMessage: (state, action) => {
-      state.messages = action.payload
+      state.messages = [...state.messages, action.payload]
     }
   },
   extraReducers: builder => {
@@ -23,6 +25,13 @@ export const messageSlice = createSlice({
       messageApi.endpoints.getMessagesByChatId.matchFulfilled,
       (state, action) => {
         state.messages = action.payload
+      }
+    ),
+    builder.addMatcher(
+      messageApi.endpoints.createMessage.matchFulfilled,
+      (state, action) => {
+        state.messages = [...state.messages, action.payload]
+        state.newMessage = action.payload
       }
     )
   }

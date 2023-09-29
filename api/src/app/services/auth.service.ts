@@ -4,7 +4,7 @@ import { SALTS } from '../../common/constants'
 import * as JWT from 'jsonwebtoken'
 import { AppDataSource } from '../../database/ormconfig'
 import { User } from '../../database/entities/user.entity'
-import { createToken, verifyToken } from '../../common/middlewares/jwt.middleware'
+import { createToken } from '../../utils/jwt.middleware'
 
 const UserRepository = AppDataSource.manager.getRepository(User)
 

@@ -2,13 +2,13 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 
 import { BASE_URL } from '../../../config/axios-instance'
 import { axiosBaseQuery } from '../../../config/base-query'
-import { User } from '../../../interfaces/user.interface'
 import { Message } from '../../../interfaces/message.interface'
 
 
 export const messageApi = createApi({
   reducerPath: 'messagesApi',
   baseQuery: axiosBaseQuery(BASE_URL),
+  refetchOnMountOrArgChange: true,
   endpoints: builder => ({
     getMessagesByChatId: builder.query<Message[], { chatId: string }>({
       query: ({ chatId }) => ({
@@ -17,17 +17,21 @@ export const messageApi = createApi({
       }),
       transformResponse: (data: Message[]) => data
     }),
-    createMessage: builder.mutation<User, Omit<User, 'createdAt' | 'id'>>({
+    createMessage: builder.mutation<Message, {
+      userId: string,
+      chatId: string,
+      text: string
+    }>({
       query: (data) => ({
-        url: '/users/register',
+        url: '/messages',
         method: 'POST',
         data
       }),
-      transformResponse: ({ data }) => data
+      transformResponse: (data: Message) => data
     })
   })
 })
 
-export const { useGetMessagesByChatIdQuery, useLazyGetMessagesByChatIdQuery } = messageApi
+export const { useGetMessagesByChatIdQuery, useLazyGetMessagesByChatIdQuery, useCreateMessageMutation } = messageApi
 
 export const { createMessage, getMessagesByChatId } = messageApi.endpoints

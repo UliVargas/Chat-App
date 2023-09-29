@@ -7,17 +7,19 @@ import { User } from './user.entity'
 })
 export class Message {
   @PrimaryGeneratedColumn('uuid')
-  id: string
+    id: string
 
-  @Column()
-  text: string
+  @Column({
+    nullable: false
+  })
+    text: string
 
   @CreateDateColumn()
-  createdAt: string
+    createdAt: string
 
   @ManyToOne(() => User, user => user.messages)
-  user: User;
+    user: User
 
   @ManyToOne(() => Chat, (chat) => chat.messages)
-  chat: Chat
+    chat: Chat
 }
