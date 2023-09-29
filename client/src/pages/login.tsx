@@ -1,11 +1,15 @@
 import { Box, Button, Container, Grid, Paper, Stack, Typography } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { TextInput } from '../components/atoms/text-input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../redux/features/auth/auth.api';
+import { LoadingButton } from '@mui/lab';
+import { SnackbarUtilities } from '../snackbar';
+import { getValidationSuccess } from '../utilities/validation';
 
 export default function LoginPage() {
-  const [Login] = useLoginMutation()
+  const [Login, { isLoading }] = useLoginMutation()
+  const navigate = useNavigate()
   return (
     <main>
       <Container sx={{
@@ -26,14 +30,17 @@ export default function LoginPage() {
                 email: '',
                 password: ''
               }}
-              onSubmit={(values) => Login(values)}
+              onSubmit={(values) => Login(values).then(() => {
+                navigate('/app/chats')
+                SnackbarUtilities.success(getValidationSuccess('login'))
+              })}
             >
               <Grid width='100%'>
                 <Form>
                 <Stack rowGap={4}>
                   <TextInput name='email' label='Correo' />
                   <TextInput name='password' type='password' label='Contraseña' />
-                  <Button type='submit' variant='contained'>Enviar</Button>
+                  <LoadingButton type='submit' variant='contained' loading={isLoading}>Enviar</LoadingButton>
                   <Typography variant='subtitle2' component='span'>
                     <Link to='/auth/register'>Registrase</Link>
                   </Typography>

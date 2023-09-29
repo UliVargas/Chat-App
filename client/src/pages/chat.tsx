@@ -10,6 +10,7 @@ import { ChatsBar } from '../components/organisms/chats-bar'
 import io, { Socket } from 'socket.io-client'
 import { addOnlineUsers } from '../redux/features/user/user.slice'
 import { addMessage } from '../redux/features/message/message.slice'
+import { AppBar } from '../components/molecules/app-bar'
 
 export default function ChatPage() {
   const { user, recipientUser } = useAppSelector(state => state.user)
@@ -72,6 +73,7 @@ export default function ChatPage() {
 
   return (
     <main>
+      <AppBar />
       <Container sx={{
         margin: '15px auto',
       }}>

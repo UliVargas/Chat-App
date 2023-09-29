@@ -1,9 +1,15 @@
 import { Form, Formik } from 'formik';
 import { TextInput } from '../components/atoms/text-input';
 import { Box, Button, Container, Grid, Paper, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRegisterMutation } from '../redux/features/auth';
+import { LoadingButton } from '@mui/lab';
+import { SnackbarUtilities } from '../snackbar';
+import { getValidationSuccess } from '../utilities/validation';
 
 export default function RegisterPage() {
+  const [Register, { isLoading }] = useRegisterMutation()
+  const navigate = useNavigate()
   return (
     <main>
       <Container sx={{
@@ -26,7 +32,10 @@ export default function RegisterPage() {
                 email: '',
                 password: ''
               }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => Register(values).then(() => {
+                SnackbarUtilities.success(getValidationSuccess('createUser'))
+                navigate('/auth/login')
+              })}
             >
               <Grid width='100%'>
                 <Form>
@@ -35,7 +44,7 @@ export default function RegisterPage() {
                     <TextInput name='last_name' label='Apellido' />
                     <TextInput name='email' label='Correo' />
                     <TextInput name='password' type='password' label='Contraseña' />
-                    <Button type='submit' variant='contained'>Enviar</Button>
+                    <LoadingButton type='submit' variant='contained' loading={isLoading}>Enviar</LoadingButton>
                     <Typography variant='subtitle2' component='span'>
                       <Link to='/auth/login'>Iniciar Sesión</Link>
                     </Typography>

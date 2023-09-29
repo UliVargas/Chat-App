@@ -9,7 +9,7 @@ import { CookiesManager } from '../../../utilities/cookies-manager'
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: axiosBaseQuery(BASE_URL),
-  endpoints: builder => ({ 
+  endpoints: builder => ({
     login: builder.mutation<User, { email: string, password: string }>({
       query: (data) => ({
         url: '/auth/login',
@@ -22,8 +22,16 @@ export const authApi = createApi({
         return data
       }
     }),
+    register: builder.mutation<User, { name: string, last_name: string, email: string, password: string }>({
+      query: (data) => ({
+        url: '/users/register',
+        method: 'POST',
+        data
+      }),
+      transformResponse: (data: AuthToken) => data
+    }),
   })
 })
 
-export const { useLoginMutation } = authApi
-export const { login } = authApi.endpoints
+export const { useLoginMutation, useRegisterMutation } = authApi
+export const { login, register } = authApi.endpoints

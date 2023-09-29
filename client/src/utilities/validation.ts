@@ -3,8 +3,7 @@ import { TypeWithKey } from '../interfaces/type-with-keys'
 export const getValidationSuccess = (endpointName: string): string => {
   const codeMatcher: TypeWithKey<string> = {
     createUser: 'El usuario se creo correctamente',
-    createMaterial: 'El material se creo correctamente',
-    loginAdmin: 'Se inició sesión correctamente'
+    login: 'Se inició sesión correctamente'
   }
   return codeMatcher[endpointName]
 }
