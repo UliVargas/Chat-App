@@ -54,7 +54,7 @@ export default function ChatPage() {
   useEffect(() => {
     if (socket === null) return
     socket.on('getMessage', resp => {
-      if(currentChatId !== resp.chat.id) return
+      if (currentChatId !== resp.chat.id) return
       dispatch(addMessage(resp))
     })
 
@@ -69,7 +69,7 @@ export default function ChatPage() {
       GetChatsByUser({ userId: user.id })
     }
   }, [GetChatsByUser, GetUsers, user])
-  
+
 
   return (
     <main>
@@ -89,9 +89,24 @@ export default function ChatPage() {
             <Grid container>
               <ChatsBar isSuccess={isSuccess} />
               <Grid item sx={{
-                width: '70%'
+                width: '70%',
               }}>
-                <ChatMessages />
+                {
+                  !currentChatId
+                    ? (
+                      <Box sx={{
+                        height: 'Calc(100vh - 200px)'
+                      }} />
+                      
+                    )
+                    : (
+                      <Box sx={{
+                        height: 'Calc(100vh - 200px)'
+                      }}>
+                        <ChatMessages />
+                      </Box>
+                    )
+                }
               </Grid>
             </Grid>
           </Box>

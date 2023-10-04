@@ -1,7 +1,6 @@
 import { hash, compare } from 'bcrypt'
 import { env } from '../../common/config/env'
 import { SALTS } from '../../common/constants'
-import * as JWT from 'jsonwebtoken'
 import { AppDataSource } from '../../database/ormconfig'
 import { User } from '../../database/entities/user.entity'
 import { createToken } from '../../utils/jwt.middleware'

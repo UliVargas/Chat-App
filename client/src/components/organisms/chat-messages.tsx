@@ -28,65 +28,58 @@ export const ChatMessages = () => {
   }, [messages])
 
   return (
-    <Box
-      sx={{
-        height: 'calc(100vh - 100px)'
-      }}
-    >
-      <Stack direction='column' height='100%'>
-        <Alert color='info' icon={false} sx={{ 
-          display: 'flex',
-          placeContent: 'center'
-        }}>
-          <Typography variant='h5'>
-            {recipientUser.name}
-          </Typography>
-        </Alert>
-        <div style={{ flexGrow: 1, overflow: "scroll", padding: '30px' }}>
-          {messages.map((message) => (
-            <div ref={scroll}>
-              <Message key={message.id} message={message} user={user} />
-            </div>
-          ))}
-        </div>
-        <div style={{ padding: 2, backgroundColor: "background.default" }}>
-          <Formik
-            initialValues={{
-              text: ''
-            }}
-            onSubmit={({ text }, { resetForm }) => {
-              CreateMessage({ text, chatId: currentChatId, userId: user.id })
-              resetForm()
-            }}
-          >
-            <Form>
-              <Grid container spacing={2}>
-                <Grid item xs={10}>
-                  <TextInput
-                    size="small"
-                    fullWidth
-                    placeholder="Escribe un mensaje"
-                    variant="outlined"
-                    name='text'
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <Button
-                    type='submit'
-                    fullWidth
-                    color="primary"
-                    variant="contained"
-                    endIcon={<SendIcon />}
-                  >
-                    Enviar
-                  </Button>
-                </Grid>
+    <Stack direction='column' height='100%'>
+      <Alert color='info' icon={false} sx={{
+        display: 'flex',
+        placeContent: 'center'
+      }}>
+        <Typography variant='h5'>
+          {recipientUser.name}
+        </Typography>
+      </Alert>
+      <div style={{ flexGrow: 1, overflow: "scroll", padding: '30px' }}>
+        {messages.map((message) => (
+          <div ref={scroll}>
+            <Message key={message.id} message={message} user={user} />
+          </div>
+        ))}
+      </div>
+      <div style={{ padding: 2, backgroundColor: "background.default" }}>
+        <Formik
+          initialValues={{
+            text: ''
+          }}
+          onSubmit={({ text }, { resetForm }) => {
+            CreateMessage({ text, chatId: currentChatId, userId: user.id })
+            resetForm()
+          }}
+        >
+          <Form>
+            <Grid container spacing={2}>
+              <Grid item xs={10}>
+                <TextInput
+                  size="small"
+                  fullWidth
+                  placeholder="Escribe un mensaje"
+                  variant="outlined"
+                  name='text'
+                />
               </Grid>
-            </Form>
-          </Formik>
-        </div>
-      </Stack>
-    </Box>
-
+              <Grid item xs={2}>
+                <Button
+                  type='submit'
+                  fullWidth
+                  color="primary"
+                  variant="contained"
+                  endIcon={<SendIcon />}
+                >
+                  Enviar
+                </Button>
+              </Grid>
+            </Grid>
+          </Form>
+        </Formik>
+      </div>
+    </Stack>
   )
 }

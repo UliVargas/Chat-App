@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm'
 import { env } from '../common/config/env'
 import { Chat, Message, User } from './entities'
-// import "reflect-metadata"
+import 'reflect-metadata'
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
