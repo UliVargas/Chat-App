@@ -1,5 +1,7 @@
 # Challenge Rest API
 
+[![Fork in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/17490790-6ae89f23-17a5-43a3-83f0-18c215cc86b8?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D17490790-6ae89f23-17a5-43a3-83f0-18c215cc86b8%26entityType%3Dcollection%26workspaceId%3D8c40179f-ee37-403b-98e9-b929de1f4b76)
+
 ## Installation
 
 ```bash
