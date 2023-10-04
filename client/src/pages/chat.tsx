@@ -54,7 +54,7 @@ export default function ChatPage() {
   useEffect(() => {
     if (socket === null) return
     socket.on('getMessage', resp => {
-      if(currentChatId !== resp.chatId) return
+      if(currentChatId !== resp.chat.id) return
       dispatch(addMessage(resp))
     })
 
