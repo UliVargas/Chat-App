@@ -3,19 +3,19 @@ import { User } from './user.entity'
 import { Message } from './message.entity'
 
 @Entity({
-  name: 'Chats',
+  name: 'Chats'
 })
 export class Chat {
   @PrimaryGeneratedColumn('uuid')
-  id: string
+    id: string
 
   @CreateDateColumn()
-  createdAt: string
+    createdAt: string
 
   @ManyToMany(() => User, user => user.chats)
   @JoinTable()
-  users: User[]
+    users: User[]
 
   @OneToMany(() => Message, message => message.chat)
-  messages: Message[]
+    messages: Message[]
 }

@@ -7,29 +7,29 @@ import { Message } from './message.entity'
 })
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string
+    id: string
 
   @Column()
-  name: string
+    name: string
 
   @Column()
-  last_name: string
+    last_name: string
 
   @Column({
     unique: true
   })
-  email: string
+    email: string
 
   @Column()
-  password: string
+    password: string
 
   @CreateDateColumn()
-  createdAt: string
+    createdAt: string
 
   @OneToMany(() => Message, (message) => message.user)
-  messages: Message[]
+    messages: Message[]
 
   @ManyToMany(() => Chat, chat => chat.users)
   @JoinTable()
-  chats: Chat[]
+    chats: Chat[]
 }

@@ -24,7 +24,6 @@ export const createChatschema = Joi.object({
   secondUserId: Joi.string().required().uuid()
 })
 
-
 export const createMessageSchema = Joi.object({
   userId: Joi.string().required(),
   chatId: Joi.string().required(),
