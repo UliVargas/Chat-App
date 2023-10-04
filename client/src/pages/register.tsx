@@ -6,6 +6,14 @@ import { useRegisterMutation } from '../redux/features/auth';
 import { LoadingButton } from '@mui/lab';
 import { SnackbarUtilities } from '../snackbar';
 import { getValidationSuccess } from '../utilities/validation';
+import * as Yup from 'yup'
+
+const validationSchema = Yup.object({
+  name: Yup.string().required('Este campo es requerido'),
+  last_name: Yup.string().required('Este campo es requerido'),
+  email: Yup.string().required('Este campo es requerido').email('Ingresa un correo válido'),
+  password: Yup.string().required('Este campo es requerido')
+})
 
 export default function RegisterPage() {
   const [Register, { isLoading }] = useRegisterMutation()
@@ -32,9 +40,10 @@ export default function RegisterPage() {
                 email: '',
                 password: ''
               }}
+              validationSchema={validationSchema}
               onSubmit={(values) => Register(values).then(() => {
                 SnackbarUtilities.success(getValidationSuccess('createUser'))
-                navigate('/auth/login')
+                navigate('/login')
               })}
             >
               <Grid width='100%'>
@@ -46,7 +55,7 @@ export default function RegisterPage() {
                     <TextInput name='password' type='password' label='Contraseña' />
                     <LoadingButton type='submit' variant='contained' loading={isLoading}>Enviar</LoadingButton>
                     <Typography variant='subtitle2' component='span'>
-                      <Link to='/auth/login'>Iniciar Sesión</Link>
+                      <Link to='/login'>Iniciar Sesión</Link>
                     </Typography>
                   </Stack>
                 </Form>

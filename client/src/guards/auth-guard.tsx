@@ -19,7 +19,7 @@ export const AuthGuard = ({ children }: { children: ReactNode }) => {
       GetUser({ userId })
     } catch (error) {
       dispatch(authenticate(false))
-      navigate('/auth/login')
+      navigate('/login')
     }
   }, [])
 

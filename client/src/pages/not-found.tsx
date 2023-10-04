@@ -18,7 +18,7 @@ export default function NotFoundPage() {
         La página que buscas no existe.
       </Typography>
       <Button variant='contained'>
-        <Link to='/home' style={{
+        <Link to='/' style={{
           textDecoration: 'none',
           color: 'white',
           fontWeight: 700

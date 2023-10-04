@@ -16,23 +16,23 @@ import ChatPage from './pages/chat.tsx'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/app/chats" replace />
+    element: <Navigate to="/chats" replace />
   },
   {
-    path: '/app/chats',
+    path: '/login',
+    element: <LoginPage />
+  },
+  {
+    path: '/register',
+    element: <RegisterPage />
+  },
+  {
+    path: '/chats',
     element: (
       <AuthGuard>
         <ChatPage />
       </AuthGuard>
     ),
-  },
-  {
-    path: '/auth/login',
-    element: <LoginPage />
-  },
-  {
-    path: '/auth/register',
-    element: <RegisterPage />
   },
   {
     path: '*',

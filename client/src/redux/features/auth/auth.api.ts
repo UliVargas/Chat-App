@@ -1,5 +1,4 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-
 import { BASE_URL } from '../../../config/axios-instance'
 import { axiosBaseQuery } from '../../../config/base-query'
 import { AuthToken, User } from '../../../interfaces/user.interface'
@@ -19,6 +18,7 @@ export const authApi = createApi({
       transformResponse: (data: AuthToken) => {
         CookiesManager.saveInCookies('token', data.token)
         CookiesManager.saveInCookies('userId', data.id)
+
         return data
       }
     }),

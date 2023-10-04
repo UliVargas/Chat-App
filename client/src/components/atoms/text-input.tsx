@@ -8,9 +8,9 @@ export const TextInput: FC<Props> = ({ ...props }) => {
   const [field, { error, touched }] = useField(props)
   
   return (
-    <>
+    <div>
       <TextField {...field} {...props} fullWidth/>
       {touched && error && <FormHelperText error>{error}</FormHelperText>}
-    </>
+    </div>
   )
 }

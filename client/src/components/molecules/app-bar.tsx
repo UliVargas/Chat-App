@@ -12,7 +12,7 @@ export const AppBar = () => {
   const logout = () => {
     CookiesManager.clearCookie('token')
     CookiesManager.clearCookie('userId')
-    navigate('/auth/login')
+    navigate('/login')
   }
   return (
     <MAppBar position="static">
