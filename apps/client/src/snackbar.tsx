@@ -7,6 +7,7 @@ export const SnackbarConfigurator: FC = () => {
   return null
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const SnackbarUtilities = {
   toast(msg: string, variant: VariantType = 'default') {
     if (msg) {
